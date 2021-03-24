@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
+ * Available tokens of TLQL.
+ *
  * @author Peter Smith
  */
 public enum QueryLanguageToken {
@@ -75,6 +77,13 @@ public enum QueryLanguageToken {
         return precedence;
     }
 
+    /**
+     * Tries to match the given input string against this token.
+     * Matches are then collected and returned as list of {@link ParsedToken} objects.
+     *
+     * @param inputString input TLQL query string
+     * @return matches as {@link List} of {@link ParsedToken} objects
+     */
     public List<ParsedToken> match(String inputString) {
 
         return tokenMatcher.matcher(inputString)
@@ -97,18 +106,6 @@ public enum QueryLanguageToken {
 
     public boolean isLogicalOperator() {
         return group == TokenGroup.LOGICAL_OPERATOR;
-    }
-
-    public boolean isSymbol() {
-        return group == TokenGroup.SYMBOL;
-    }
-
-    public boolean isLiteral() {
-        return group == TokenGroup.LITERAL;
-    }
-
-    public boolean isTerminator() {
-        return group == TokenGroup.TERMINATOR;
     }
 
     public TokenGroup getGroup() {

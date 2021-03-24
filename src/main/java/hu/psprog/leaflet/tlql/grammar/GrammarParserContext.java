@@ -41,6 +41,12 @@ public class GrammarParserContext {
         prepareLookaheads();
     }
 
+    /**
+     * Returns current first look-ahead {@link ParsedToken} after verifying its token type.
+     *
+     * @param token {@link QueryLanguageToken} enum constant to verify current {@link ParsedToken} against
+     * @return current first look-ahead {@link ParsedToken} object
+     */
     public ParsedToken readToken(QueryLanguageToken token) {
 
         assertExpectedToken(token);
@@ -48,6 +54,12 @@ public class GrammarParserContext {
         return lookAheadFirst;
     }
 
+    /**
+     * Returns current first look-ahead {@link ParsedToken} after verifying its token type.
+     *
+     * @param tokenGroup {@link QueryLanguageToken.TokenGroup} to verify current {@link ParsedToken} against
+     * @return current first look-ahead {@link ParsedToken} object
+     */
     public ParsedToken readToken(QueryLanguageToken.TokenGroup tokenGroup) {
 
         assertExpectedToken(tokenGroup);
@@ -55,6 +67,10 @@ public class GrammarParserContext {
         return lookAheadFirst;
     }
 
+    /**
+     * Advances context by overwriting the reference of first look-ahead with the second, and retrieving the next
+     * available token from the sequence. If the token sequence is already empty, a termination token is set.
+     */
     public void discardToken() {
 
         lookAheadFirst = lookAheadSecond.clone();
@@ -63,18 +79,25 @@ public class GrammarParserContext {
                 : tokenSequence.pop();
     }
 
+    /**
+     * Advances context by overwriting the reference of first look-ahead with the second, and retrieving the next
+     * available token from the sequence. If the token sequence is already empty, a termination token is set.
+     * Before doing so, verifies current first look-ahead {@link ParsedToken} againts the given {@link QueryLanguageToken}.
+     *
+     * @param token {@link QueryLanguageToken} enum constant to verify current {@link ParsedToken} against
+     */
     public void discardToken(QueryLanguageToken token) {
 
         assertExpectedToken(token);
         discardToken();
     }
 
-    public void discardToken(QueryLanguageToken.TokenGroup tokenGroup) {
-
-        assertExpectedToken(tokenGroup);
-        discardToken();
-    }
-
+    /**
+     * Creates a {@link DSLCondition} object and sets the currentCondition reference to point to this newly created one.
+     * If no condition group exists yet, it creates one.
+     *
+     * @return created {@link DSLCondition} object
+     */
     public DSLCondition createDSLCondition() {
 
         if (Objects.isNull(currentConditionGroup)) {
@@ -90,6 +113,9 @@ public class GrammarParserContext {
         return currentCondition;
     }
 
+    /**
+     * Opens a new condition group if there's no open one yet.
+     */
     public void openConditionGroup() {
 
         if (!conditionGroupOpen) {
@@ -100,6 +126,9 @@ public class GrammarParserContext {
         }
     }
 
+    /**
+     * Closes the currently open condition group and opens a new one for further conditions.
+     */
     public void closeConditionGroup() {
 
         if (conditionGroupOpen) {
@@ -109,6 +138,9 @@ public class GrammarParserContext {
         }
     }
 
+    /**
+     * Creates an ordering entry in the context and advances.
+     */
     public void addOrderingAndAdvance() {
 
         DSLObject object = DSLMapping.TOKEN_TO_OBJECT_MAP.get(readToken(QueryLanguageToken.TokenGroup.OBJECT).getToken());
@@ -119,34 +151,78 @@ public class GrammarParserContext {
         queryModel.getOrdering().put(object, direction);
     }
 
+    /**
+     * Returns query model.
+     *
+     * @return query model as {@link DSLQueryModel} object
+     */
     public DSLQueryModel getQueryModel() {
         return queryModel;
     }
 
+    /**
+     * Returns current condition object.
+     *
+     * @return current condition as {@link DSLCondition} object
+     */
     public DSLCondition getCurrentCondition() {
         return currentCondition;
     }
 
+    /**
+     * Returns currently open condition group.
+     *
+     * @return current condition group as {@link DSLConditionGroup} object
+     */
     public DSLConditionGroup getCurrentConditionGroup() {
         return currentConditionGroup;
     }
 
+    /**
+     * Returns the token type of the first look-ahead.
+     *
+     * @return token type of the first look-ahead token as {@link QueryLanguageToken}
+     */
     public QueryLanguageToken getNextToken() {
         return lookAheadFirst.getToken();
     }
 
+    /**
+     * Returns the token type of the second look-ahead.
+     *
+     * @return token type of the second look-ahead token as {@link QueryLanguageToken}
+     */
     public QueryLanguageToken getUpcomingToken() {
         return lookAheadSecond.getToken();
     }
 
+    /**
+     * Returns the first look-ahead token.
+     *
+     * @return first look-ahead token as {@link ParsedToken}
+     */
     public ParsedToken getLookAheadFirst() {
         return lookAheadFirst;
     }
 
+    /**
+     * Returns the second look-ahead token.
+     *
+     * @return second look-ahead token as {@link ParsedToken}
+     */
     public ParsedToken getLookAheadSecond() {
         return lookAheadSecond;
     }
 
+    /**
+     * Extracts value of the current literal token and advances context.
+     * Also verifies token types beforehand.
+     *
+     * @param assertToken {@link QueryLanguageToken} enum constant to verify current {@link ParsedToken} against
+     * @param mapperFunction mapper function to map the value to the proper target type
+     * @param <T> return type (extracted value's target type)
+     * @return extracted value as T
+     */
     public <T> T extractValueAndAdvance(QueryLanguageToken assertToken, Function<String, T> mapperFunction) {
 
         T value = assertNonNullValue(mapperFunction.apply(readToken(assertToken).getValue()));
@@ -155,6 +231,14 @@ public class GrammarParserContext {
         return value;
     }
 
+    /**
+     * Extracts value of the current token and maps to a target DSL entity type.
+     * Can be used for mapping (logical) operators, objects, etc.
+     *
+     * @param valueFunction mapper function to map the value to the proper DSL entity type
+     * @param <T> return type (extracted value's target type)
+     * @return extracted value as T
+     */
     public <T> T extractValueAndAdvance(Function<QueryLanguageToken, T> valueFunction) {
 
         T value = assertNonNullValue(valueFunction.apply(lookAheadFirst.getToken()));

@@ -41,16 +41,4 @@ public interface QuerySectionParser {
      * @return ID of this parser as {@link QuerySection} enum constant
      */
     QuerySection forSection();
-//
-//    default String rule(GrammarParserContext context) {
-//
-//        String keyword = getKeyword(context);
-//        String chainTo = Optional.ofNullable(chainTo(context))
-//                .map(Enum::name)
-//                .orElse("EOS");
-//
-//        return String.format("%s -> %s %s", forSection(), keyword, chainTo);
-//    }
-//
-//    String getKeyword(GrammarParserContext context);
 }
