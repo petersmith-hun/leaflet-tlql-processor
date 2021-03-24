@@ -32,9 +32,4 @@ public class SearchSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.SEARCH;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return "search";
-//    }
 }

@@ -41,9 +41,4 @@ public class MainSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.MAIN;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return "";
-//    }
 }

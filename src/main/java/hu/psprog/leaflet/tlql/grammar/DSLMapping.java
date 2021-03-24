@@ -53,6 +53,8 @@ public interface DSLMapping {
      */
     Map<QueryLanguageToken, DSLOrderDirection> TOKEN_TO_ORDER_DIRECTION_MAP = Map.of(
             QueryLanguageToken.KEYWORD_ASC, DSLOrderDirection.ASC,
-            QueryLanguageToken.KEYWORD_DESC, DSLOrderDirection.DESC
+            QueryLanguageToken.KEYWORD_DESC, DSLOrderDirection.DESC,
+            QueryLanguageToken.KEYWORD_ASCENDING, DSLOrderDirection.ASC,
+            QueryLanguageToken.KEYWORD_DESCENDING, DSLOrderDirection.DESC
     );
 }

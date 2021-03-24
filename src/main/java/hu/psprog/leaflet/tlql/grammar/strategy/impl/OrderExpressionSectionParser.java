@@ -23,7 +23,8 @@ import java.util.List;
 public class OrderExpressionSectionParser implements QuerySectionParser {
 
     private static final List<QueryLanguageToken> ORDER_DIRECTION_TOKENS =
-            Arrays.asList(QueryLanguageToken.KEYWORD_ASC, QueryLanguageToken.KEYWORD_DESC);
+            Arrays.asList(QueryLanguageToken.KEYWORD_ASC, QueryLanguageToken.KEYWORD_DESC,
+                    QueryLanguageToken.KEYWORD_ASCENDING, QueryLanguageToken.KEYWORD_DESCENDING);
 
     @Override
     public void parseSection(GrammarParserContext context) {
@@ -35,7 +36,7 @@ public class OrderExpressionSectionParser implements QuerySectionParser {
             throw new DSLParserException(String.format("Expected OBJECT token, got %s", objectToken));
         }
 
-        if (!(directionToken.isKeyword()  && ORDER_DIRECTION_TOKENS.contains(directionToken))) {
+        if (!(directionToken.isKeyword() && ORDER_DIRECTION_TOKENS.contains(directionToken))) {
             throw new DSLParserException(String.format("Expected order direction expression (object asc|desc), got %s %s", objectToken, directionToken));
         }
 
@@ -51,16 +52,4 @@ public class OrderExpressionSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.ORDER_EXPRESSION;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//
-//        DSLOrderDirection lastOrderingDirection = context.getQueryModel()
-//                .getOrdering()
-//                .values().stream()
-//                .reduce((direction, direction2) -> direction2)
-//                .orElse(null);
-//
-//        return String.format("object %s", lastOrderingDirection);
-//    }
 }

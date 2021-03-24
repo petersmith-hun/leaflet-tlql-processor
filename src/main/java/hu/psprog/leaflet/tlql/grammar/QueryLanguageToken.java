@@ -14,8 +14,10 @@ public enum QueryLanguageToken {
     KEYWORD_CONDITIONS("conditions", 1, TokenGroup.KEYWORD, 0),
     KEYWORD_ORDER("order", 1, TokenGroup.KEYWORD, 0),
     KEYWORD_BY("by", 1, TokenGroup.KEYWORD, 0),
-    KEYWORD_ASC("asc|ascending", 1, TokenGroup.KEYWORD, 0),
-    KEYWORD_DESC("desc|descending", 1, TokenGroup.KEYWORD, 0),
+    KEYWORD_ASC("asc", 2, TokenGroup.KEYWORD, 0),
+    KEYWORD_DESC("desc", 2, TokenGroup.KEYWORD, 0),
+    KEYWORD_ASCENDING("ascending", 1, TokenGroup.KEYWORD, 0),
+    KEYWORD_DESCENDING("descending", 1, TokenGroup.KEYWORD, 0),
     KEYWORD_THEN("then", 1, TokenGroup.KEYWORD, 0),
     KEYWORD_LIMIT("limit", 1, TokenGroup.KEYWORD, 0),
     KEYWORD_OFFSET("offset", 1, TokenGroup.KEYWORD, 0),
@@ -65,15 +67,19 @@ public enum QueryLanguageToken {
         this.grabGroupIndex = grabGroupIndex;
     }
 
+    public Pattern getTokenMatcher() {
+        return tokenMatcher;
+    }
+
     public int getPrecedence() {
         return precedence;
     }
 
-    public List<TokenMatch> match(String inputString) {
+    public List<ParsedToken> match(String inputString) {
 
         return tokenMatcher.matcher(inputString)
                 .results()
-                .map(matchResult -> new TokenMatch(this, matchResult))
+                .map(matchResult -> new ParsedToken(this, matchResult))
                 .collect(Collectors.toList());
     }
 

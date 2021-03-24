@@ -41,14 +41,6 @@ public class TimestampConditionSectionParser extends AbstractConditionSectionPar
     public QuerySection forSection() {
         return QuerySection.TIMESTAMP_CONDITION;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//
-//        return String.format("timestamp %s", context.getCurrentCondition().getOperator() == DSLOperator.BETWEEN
-//                ? "between timestamp_interval_expression"
-//                : "operator timestamp_expression");
-//    }
 
     @Override
     protected void processCondition(GrammarParserContext context) {

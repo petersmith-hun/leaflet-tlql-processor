@@ -34,9 +34,4 @@ public class LimitSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.LIMIT;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return "limit number_literal";
-//    }
 }

@@ -27,11 +27,6 @@ public class MultiMatchConditionSectionParser extends AbstractConditionSectionPa
     public QuerySection forSection() {
         return QuerySection.MULTI_MATCH_CONDITION;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return String.format("object %s array_of_string_literals", context.getCurrentCondition().getOperator().name().toLowerCase());
-//    }
 
     @Override
     protected void processCondition(GrammarParserContext context) {
@@ -40,11 +35,12 @@ public class MultiMatchConditionSectionParser extends AbstractConditionSectionPa
 
         currentCondition.setObject(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OBJECT_MAP::get));
         currentCondition.setOperator(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OPERATOR_MAP::get));
-        context.discardToken(QueryLanguageToken.SYMBOL_OPENING_BRACKET);
         currentCondition.setMultipleValue(extractParameters(context));
     }
 
     private List<String> extractParameters(GrammarParserContext context) {
+
+        context.discardToken(QueryLanguageToken.SYMBOL_OPENING_BRACKET);
 
         List<String> valueList = new LinkedList<>();
         while (true) {

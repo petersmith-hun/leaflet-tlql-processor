@@ -7,6 +7,7 @@ import hu.psprog.leaflet.tlql.ir.DSLObject;
 import hu.psprog.leaflet.tlql.ir.DSLOrderDirection;
 import hu.psprog.leaflet.tlql.ir.DSLQueryModel;
 
+import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -58,7 +59,7 @@ public class GrammarParserContext {
 
         lookAheadFirst = lookAheadSecond.clone();
         lookAheadSecond = tokenSequence.isEmpty()
-                ? new ParsedToken(QueryLanguageToken.TERMINATOR, "")
+                ? ParsedToken.TERMINATION_TOKEN
                 : tokenSequence.pop();
     }
 
@@ -77,8 +78,10 @@ public class GrammarParserContext {
     public DSLCondition createDSLCondition() {
 
         if (Objects.isNull(currentConditionGroup)) {
+            // openConditionGroup(); // TODO change to this when fixed
             currentConditionGroup = new DSLConditionGroup();
             queryModel.getConditionGroups().add(currentConditionGroup);
+            // conditionGroupOpen = true; // TODO check why doesn't this work!
         }
 
         currentCondition = new DSLCondition();
@@ -176,8 +179,12 @@ public class GrammarParserContext {
     }
 
     private void prepareLookaheads() {
-        lookAheadFirst = tokenSequence.pop();
-        lookAheadSecond = tokenSequence.pop();
+        try {
+            lookAheadFirst = tokenSequence.pop();
+            lookAheadSecond = tokenSequence.pop();
+        } catch (EmptyStackException exc) {
+            throw new DSLParserException("Too few tokens in input query.");
+        }
     }
 
     private void assertExpectedToken(QueryLanguageToken token) {

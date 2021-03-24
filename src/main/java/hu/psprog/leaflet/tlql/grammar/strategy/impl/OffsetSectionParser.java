@@ -33,9 +33,4 @@ public class OffsetSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.OFFSET;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return "offset number_literal";
-//    }
 }

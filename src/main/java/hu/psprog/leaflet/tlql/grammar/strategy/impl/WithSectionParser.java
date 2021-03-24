@@ -49,9 +49,4 @@ public class WithSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.WITH;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return "with";
-//    }
 }

@@ -1,0 +1,7 @@
+search
+with conditions
+  source either ("lflt", "cbfs", "lcfa")
+  and level = "error"
+  and timestamp > 2021-03-20
+with limit 20
+with offset 50

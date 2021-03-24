@@ -79,12 +79,4 @@ public class ConditionChainSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.CONDITION_CHAIN;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return Optional.ofNullable(context.getCurrentCondition().getNextConditionOperator())
-//                .map(Enum::name)
-//                .map(String::toLowerCase)
-//                .orElse("");
-//    }
 }

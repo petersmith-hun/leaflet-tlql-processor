@@ -1,5 +1,6 @@
 package hu.psprog.leaflet.tlql.grammar.strategy.impl;
 
+import hu.psprog.leaflet.tlql.exception.DSLParserException;
 import hu.psprog.leaflet.tlql.grammar.GrammarParserContext;
 import hu.psprog.leaflet.tlql.grammar.strategy.QuerySection;
 import hu.psprog.leaflet.tlql.grammar.strategy.QuerySectionParser;
@@ -37,10 +38,13 @@ public class ConditionsSectionParser implements QuerySectionParser {
         QuerySection chainToSection;
         if (context.getNextToken() == QueryLanguageToken.OBJECT_TIMESTAMP) {
             chainToSection = QuerySection.TIMESTAMP_CONDITION;
-        } else if (MULTI_MATCH_CONDITIONAL_TOKENS.contains(context.getUpcomingToken())) {
+        } else if (context.getNextToken().isObject() && MULTI_MATCH_CONDITIONAL_TOKENS.contains(context.getUpcomingToken())) {
             chainToSection = QuerySection.MULTI_MATCH_CONDITION;
-        } else {
+        } else if (context.getNextToken().isObject() && context.getUpcomingToken().isOperator()) {
             chainToSection = QuerySection.SIMPLE_CONDITION;
+        } else {
+            throw new DSLParserException(String.format("Unexpected tokens near CONDITIONS: %s %s",
+                    context.getNextToken(), context.getUpcomingToken()));
         }
 
         return chainToSection;
@@ -50,9 +54,4 @@ public class ConditionsSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.CONDITIONS;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return "conditions";
-//    }
 }

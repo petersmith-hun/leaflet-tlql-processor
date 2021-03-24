@@ -23,11 +23,6 @@ public class SimpleConditionSectionParser extends AbstractConditionSectionParser
     public QuerySection forSection() {
         return QuerySection.SIMPLE_CONDITION;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//        return "object operator string_literal";
-//    }
 
     @Override
     protected void processCondition(GrammarParserContext context) {

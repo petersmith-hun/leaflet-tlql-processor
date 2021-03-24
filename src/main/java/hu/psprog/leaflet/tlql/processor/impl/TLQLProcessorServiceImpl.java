@@ -22,7 +22,8 @@ public class TLQLProcessorServiceImpl implements TLQLProcessorService {
     private final RegexBasedQueryLanguageTokenizer regexBasedQueryLanguageTokenizer;
 
     @Autowired
-    public TLQLProcessorServiceImpl(StrategyBasedQueryLanguageParser strategyBasedQueryLanguageParser, RegexBasedQueryLanguageTokenizer regexBasedQueryLanguageTokenizer) {
+    public TLQLProcessorServiceImpl(StrategyBasedQueryLanguageParser strategyBasedQueryLanguageParser,
+                                    RegexBasedQueryLanguageTokenizer regexBasedQueryLanguageTokenizer) {
         this.strategyBasedQueryLanguageParser = strategyBasedQueryLanguageParser;
         this.regexBasedQueryLanguageTokenizer = regexBasedQueryLanguageTokenizer;
     }

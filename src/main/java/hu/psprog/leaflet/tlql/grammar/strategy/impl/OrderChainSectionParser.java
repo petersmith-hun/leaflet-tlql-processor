@@ -40,12 +40,4 @@ public class OrderChainSectionParser implements QuerySectionParser {
     public QuerySection forSection() {
         return QuerySection.ORDER_CHAIN;
     }
-//
-//    @Override
-//    public String getKeyword(GrammarParserContext context) {
-//
-//        return chainTo(context) == QuerySection.MAIN
-//                ? ""
-//                : "then";
-//    }
 }
