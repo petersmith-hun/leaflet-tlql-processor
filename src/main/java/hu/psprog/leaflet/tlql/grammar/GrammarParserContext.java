@@ -29,6 +29,7 @@ public class GrammarParserContext {
     private DSLCondition currentCondition;
     private DSLConditionGroup currentConditionGroup;
     private boolean conditionGroupOpen = false;
+    private boolean conditionGroupCloseSeen = true;
 
     /**
      * Creates a {@link GrammarParserContext} object based on the passed list of {@link ParsedToken} objects.
@@ -101,10 +102,7 @@ public class GrammarParserContext {
     public DSLCondition createDSLCondition() {
 
         if (Objects.isNull(currentConditionGroup)) {
-            // openConditionGroup(); // TODO change to this when fixed
-            currentConditionGroup = new DSLConditionGroup();
-            queryModel.getConditionGroups().add(currentConditionGroup);
-            // conditionGroupOpen = true; // TODO check why doesn't this work!
+            openConditionGroup();
         }
 
         currentCondition = new DSLCondition();
@@ -118,8 +116,8 @@ public class GrammarParserContext {
      */
     public void openConditionGroup() {
 
-        if (!conditionGroupOpen) {
-            DSLConditionGroup conditionGroup = new DSLConditionGroup(currentConditionGroup);
+        if (!conditionGroupOpen || conditionGroupCloseSeen) {
+            DSLConditionGroup conditionGroup = new DSLConditionGroup();
             queryModel.getConditionGroups().add(conditionGroup);
             currentConditionGroup = conditionGroup;
             conditionGroupOpen = true;
@@ -127,14 +125,21 @@ public class GrammarParserContext {
     }
 
     /**
-     * Closes the currently open condition group and opens a new one for further conditions.
+     * Marks condition group close symbol as seen.
+     */
+    public void markConditionGroupCloseAsUnseen() {
+        conditionGroupCloseSeen = false;
+    }
+
+    /**
+     * Closes the currently open condition group.
      */
     public void closeConditionGroup() {
 
         if (conditionGroupOpen) {
-            currentConditionGroup = currentConditionGroup.getParentGroup();
+            currentConditionGroup = null;
             conditionGroupOpen = false;
-            openConditionGroup();
+            conditionGroupCloseSeen = true;
         }
     }
 

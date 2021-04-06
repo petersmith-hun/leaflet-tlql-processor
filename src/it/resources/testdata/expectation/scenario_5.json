@@ -4,42 +4,37 @@
       "conditions": [
         {
           "object": "SOURCE",
-          "operator": "EITHER",
+          "operator": "NONE",
           "value": null,
           "multipleValue": [
-            "lflt",
-            "cbfs",
-            "lcfa"
+            "lcfa",
+            "cbfs"
           ],
           "timestampValue": null,
           "nextConditionOperator": "AND"
         },
         {
           "object": "LEVEL",
-          "operator": "EQUALS",
-          "value": "error",
-          "multipleValue": null,
+          "operator": "EITHER",
+          "value": null,
+          "multipleValue": [
+            "info",
+            "warn",
+            "error"
+          ],
           "timestampValue": null,
           "nextConditionOperator": "AND"
         },
         {
           "object": "TIMESTAMP",
-          "operator": "GREATER_THAN",
+          "operator": "BETWEEN",
           "value": null,
           "multipleValue": null,
           "timestampValue": {
-            "intervalType": "NONE",
-            "leftOrSimple": "2021-03-20T00:00:00",
-            "right": null
+            "intervalType": "FULL_INCLUSIVE",
+            "leftOrSimple": "2021-03-21T00:00:00",
+            "right": "2021-03-28T00:00:00"
           },
-          "nextConditionOperator": "AND"
-        },
-        {
-          "object": "MESSAGE",
-          "operator": "LIKE",
-          "value": "something went wrong",
-          "multipleValue": null,
-          "timestampValue": null,
           "nextConditionOperator": null
         }
       ],
@@ -47,6 +42,6 @@
     }
   ],
   "ordering": {},
-  "offset": 50,
-  "limit": 20
+  "offset": 0,
+  "limit": 100
 }

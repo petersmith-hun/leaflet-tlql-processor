@@ -2,6 +2,7 @@ package hu.psprog.leaflet.tlql.grammar.strategy.impl;
 
 import hu.psprog.leaflet.tlql.grammar.DSLMapping;
 import hu.psprog.leaflet.tlql.grammar.GrammarParserContext;
+import hu.psprog.leaflet.tlql.grammar.QueryLanguageToken;
 import hu.psprog.leaflet.tlql.grammar.strategy.QuerySection;
 import hu.psprog.leaflet.tlql.ir.DSLCondition;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,7 @@ public class SimpleConditionSectionParser extends AbstractConditionSectionParser
 
         currentCondition.setObject(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OBJECT_MAP::get));
         currentCondition.setOperator(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OPERATOR_MAP::get));
-        currentCondition.setValue(context.extractValueAndAdvance(context::readToken).getValue());
+        currentCondition.setValue(context.readToken(QueryLanguageToken.TokenGroup.LITERAL).getValue());
+        context.discardToken();
     }
 }

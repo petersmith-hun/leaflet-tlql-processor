@@ -1,0 +1,13 @@
+search
+with conditions
+  (
+    source = "lcfa"
+    or source = "cbfs"
+  )
+  or level = "error"
+  and (
+      level = "warn"
+      or logger = "hu.psprog.leaflet.lcfa.Something"
+  )
+with limit 20
+with offset 50

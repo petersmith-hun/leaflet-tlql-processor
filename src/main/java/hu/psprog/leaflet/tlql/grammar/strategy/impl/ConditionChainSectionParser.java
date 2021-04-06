@@ -53,6 +53,7 @@ public class ConditionChainSectionParser implements QuerySectionParser {
 
         if (context.getNextToken() == QueryLanguageToken.SYMBOL_OPENING_BRACKET) {
             context.openConditionGroup();
+            context.markConditionGroupCloseAsUnseen();
             context.discardToken();
         }
     }

@@ -1,0 +1,32 @@
+{
+  "conditionGroups": [
+    {
+      "conditions": [
+        {
+          "object": "SOURCE",
+          "operator": "EQUALS",
+          "value": "leaflet",
+          "multipleValue": null,
+          "timestampValue": null,
+          "nextConditionOperator": "AND"
+        },
+        {
+          "object": "TIMESTAMP",
+          "operator": "BETWEEN",
+          "value": null,
+          "multipleValue": null,
+          "timestampValue": {
+            "intervalType": "FULL_EXCLUSIVE",
+            "leftOrSimple": "2021-03-21T12:00:00",
+            "right": "2021-03-28T23:00:00"
+          },
+          "nextConditionOperator": null
+        }
+      ],
+      "nextConditionGroupOperator": null
+    }
+  ],
+  "ordering": {},
+  "offset": 0,
+  "limit": 100
+}

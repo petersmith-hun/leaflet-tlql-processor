@@ -1,0 +1,41 @@
+{
+  "conditionGroups": [
+    {
+      "conditions": [
+        {
+          "object": "SOURCE",
+          "operator": "EQUALS",
+          "value": "lcfa",
+          "multipleValue": null,
+          "timestampValue": null,
+          "nextConditionOperator": null
+        }
+      ],
+      "nextConditionGroupOperator": "AND"
+    },
+    {
+      "conditions": [
+        {
+          "object": "LEVEL",
+          "operator": "EQUALS",
+          "value": "error",
+          "multipleValue": null,
+          "timestampValue": null,
+          "nextConditionOperator": "OR"
+        },
+        {
+          "object": "LOGGER",
+          "operator": "NOT_EQUALS",
+          "value": "hu.psprog.leaflet.lcfa.Something",
+          "multipleValue": null,
+          "timestampValue": null,
+          "nextConditionOperator": null
+        }
+      ],
+      "nextConditionGroupOperator": null
+    }
+  ],
+  "ordering": {},
+  "offset": 50,
+  "limit": 20
+}

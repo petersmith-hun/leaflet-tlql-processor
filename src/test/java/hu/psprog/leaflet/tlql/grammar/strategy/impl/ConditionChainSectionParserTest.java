@@ -49,7 +49,7 @@ class ConditionChainSectionParserTest extends AbstractSectionParserBaseTest {
                 nullValue());
         assertThat(grammarParserContext.getCurrentCondition().getNextConditionOperator(),
                 equalTo(DSLLogicalOperator.OR));
-        assertConditionGroupStatus(grammarParserContext, false); // TODO this should be true after fixed
+        assertConditionGroupStatus(grammarParserContext, true);
     }
 
     @Test

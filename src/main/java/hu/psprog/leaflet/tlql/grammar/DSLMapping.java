@@ -21,7 +21,8 @@ public interface DSLMapping {
             QueryLanguageToken.OBJECT_SOURCE, DSLObject.SOURCE,
             QueryLanguageToken.OBJECT_LEVEL, DSLObject.LEVEL,
             QueryLanguageToken.OBJECT_MESSAGE, DSLObject.MESSAGE,
-            QueryLanguageToken.OBJECT_TIMESTAMP, DSLObject.TIMESTAMP
+            QueryLanguageToken.OBJECT_TIMESTAMP, DSLObject.TIMESTAMP,
+            QueryLanguageToken.OBJECT_LOGGER, DSLObject.LOGGER
     );
 
     /**

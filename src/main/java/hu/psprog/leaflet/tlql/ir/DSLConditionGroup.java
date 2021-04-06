@@ -14,21 +14,8 @@ import java.util.List;
  */
 public class DSLConditionGroup {
 
-    private final DSLConditionGroup parentGroup;
     private final List<DSLCondition> conditions = new LinkedList<>();
     private DSLLogicalOperator nextConditionGroupOperator;
-
-    public DSLConditionGroup() {
-        this.parentGroup = null;
-    }
-
-    public DSLConditionGroup(DSLConditionGroup parentGroup) {
-        this.parentGroup = parentGroup;
-    }
-
-    public DSLConditionGroup getParentGroup() {
-        return parentGroup;
-    }
 
     public List<DSLCondition> getConditions() {
         return conditions;
@@ -51,7 +38,6 @@ public class DSLConditionGroup {
         DSLConditionGroup that = (DSLConditionGroup) o;
 
         return new EqualsBuilder()
-                .append(parentGroup, that.parentGroup)
                 .append(conditions, that.conditions)
                 .append(nextConditionGroupOperator, that.nextConditionGroupOperator)
                 .isEquals();
@@ -60,7 +46,6 @@ public class DSLConditionGroup {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(parentGroup)
                 .append(conditions)
                 .append(nextConditionGroupOperator)
                 .toHashCode();
@@ -69,7 +54,6 @@ public class DSLConditionGroup {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("parentGroup", parentGroup)
                 .append("conditions", conditions)
                 .append("nextConditionGroupOperator", nextConditionGroupOperator)
                 .toString();
