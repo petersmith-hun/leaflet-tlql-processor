@@ -1,0 +1,9 @@
+search
+with conditions
+  source = "lcfa"
+  and (
+    level = "error"
+    or logger != "hu.psprog.leaflet.lcfa.Something"
+  )
+with limit 20
+with offset 50

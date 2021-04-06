@@ -1,0 +1,6 @@
+search
+with conditions
+  source none ('lcfa', 'cbfs')
+  and level either ('info', 'warn', 'error')
+  and timestamp between [2021-03-21, 2021-03-28]
+with limit 100

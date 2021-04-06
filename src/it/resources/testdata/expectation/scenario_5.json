@@ -1,0 +1,47 @@
+{
+  "conditionGroups": [
+    {
+      "conditions": [
+        {
+          "object": "SOURCE",
+          "operator": "NONE",
+          "value": null,
+          "multipleValue": [
+            "lcfa",
+            "cbfs"
+          ],
+          "timestampValue": null,
+          "nextConditionOperator": "AND"
+        },
+        {
+          "object": "LEVEL",
+          "operator": "EITHER",
+          "value": null,
+          "multipleValue": [
+            "info",
+            "warn",
+            "error"
+          ],
+          "timestampValue": null,
+          "nextConditionOperator": "AND"
+        },
+        {
+          "object": "TIMESTAMP",
+          "operator": "BETWEEN",
+          "value": null,
+          "multipleValue": null,
+          "timestampValue": {
+            "intervalType": "FULL_INCLUSIVE",
+            "leftOrSimple": "2021-03-21T00:00:00",
+            "right": "2021-03-28T00:00:00"
+          },
+          "nextConditionOperator": null
+        }
+      ],
+      "nextConditionGroupOperator": null
+    }
+  ],
+  "ordering": {},
+  "offset": 0,
+  "limit": 100
+}

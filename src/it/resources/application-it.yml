@@ -1,0 +1,6 @@
+logging:
+  level:
+    root: info
+
+it:
+  show-generated-query-model: true

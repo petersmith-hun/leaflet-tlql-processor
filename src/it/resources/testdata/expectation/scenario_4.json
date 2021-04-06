@@ -1,0 +1,9 @@
+{
+  "conditionGroups": [],
+  "ordering": {
+    "TIMESTAMP": "DESC",
+    "LEVEL": "ASC"
+  },
+  "offset": 200,
+  "limit": 50
+}

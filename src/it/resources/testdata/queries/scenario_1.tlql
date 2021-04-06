@@ -1,0 +1,8 @@
+search
+with conditions
+  source either ("lflt", "cbfs", "lcfa")
+  and level = "error"
+  and timestamp > 2021-03-20
+  and message ~ "something went wrong"
+with limit 20
+with offset 50
