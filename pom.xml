@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>leaflet-tlql-processor</artifactId>
-    <version>1.0.3</version>
+    <version>1.1.0</version>
 
     <parent>
         <groupId>hu.psprog.leaflet</groupId>
         <artifactId>leaflet-stack-base-bom</artifactId>
-        <version>2.1-r2302.1</version>
+        <version>3.0-r2305.1</version>
     </parent>
 
     <properties>
 
         <!-- Java environment version -->
-        <java.version>11</java.version>
+        <java.version>17</java.version>
 
         <!-- Compiler settings -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -39,8 +39,8 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

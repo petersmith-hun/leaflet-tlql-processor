@@ -1,9 +1,7 @@
 package hu.psprog.leaflet.tlql.ir;
 
 import hu.psprog.leaflet.tlql.grammar.QueryLanguageToken;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author Peter Smith
  */
+@Data
 public class DSLTimestampValue {
 
     private final IntervalType intervalType;
@@ -49,52 +48,8 @@ public class DSLTimestampValue {
         this.right = right;
     }
 
-    public IntervalType getIntervalType() {
-        return intervalType;
-    }
-
-    public LocalDateTime getLeftOrSimple() {
-        return leftOrSimple;
-    }
-
-    public LocalDateTime getRight() {
-        return right;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DSLTimestampValue that = (DSLTimestampValue) o;
-
-        return new EqualsBuilder()
-                .append(intervalType, that.intervalType)
-                .append(leftOrSimple, that.leftOrSimple)
-                .append(right, that.right)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(intervalType)
-                .append(leftOrSimple)
-                .append(right)
-                .toHashCode();
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("intervalType", intervalType)
-                .append("leftOrSimple", leftOrSimple)
-                .append("right", right)
-                .toString();
-    }
-
     public enum IntervalType {
+
         NONE(null, null),
         FULL_INCLUSIVE(QueryLanguageToken.SYMBOL_OPENING_SQUARE_BRACKET, QueryLanguageToken.SYMBOL_CLOSING_SQUARE_BRACKET),
         FULL_EXCLUSIVE(QueryLanguageToken.SYMBOL_CLOSING_SQUARE_BRACKET, QueryLanguageToken.SYMBOL_OPENING_SQUARE_BRACKET),
