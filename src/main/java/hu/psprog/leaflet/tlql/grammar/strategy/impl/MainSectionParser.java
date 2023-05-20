@@ -27,14 +27,11 @@ public class MainSectionParser implements QuerySectionParser {
     @Override
     public QuerySection chainTo(GrammarParserContext context) {
 
-        switch (context.getNextToken()) {
-            case KEYWORD_WITH:
-                return QuerySection.WITH;
-            case TERMINATOR:
-                return null;
-            default:
-                throw new DSLParserException(String.format("Unexpected token %s", context.getNextToken()));
-        }
+        return switch (context.getNextToken()) {
+            case KEYWORD_WITH -> QuerySection.WITH;
+            case TERMINATOR -> null;
+            default -> throw new DSLParserException(String.format("Unexpected token %s", context.getNextToken()));
+        };
     }
 
     @Override

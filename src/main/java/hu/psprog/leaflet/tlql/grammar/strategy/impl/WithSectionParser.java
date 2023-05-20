@@ -31,18 +31,14 @@ public class WithSectionParser implements QuerySectionParser {
     @Override
     public QuerySection chainTo(GrammarParserContext context) {
 
-        switch (context.getNextToken()) {
-            case KEYWORD_CONDITIONS:
-                return QuerySection.CONDITIONS;
-            case KEYWORD_ORDER:
-                return QuerySection.ORDER_BY;
-            case KEYWORD_LIMIT:
-                return QuerySection.LIMIT;
-            case KEYWORD_OFFSET:
-                return QuerySection.OFFSET;
-            default:
-                throw new DSLParserException(String.format("Unexpected token %s of '%s'", context.getNextToken(), context.getLookAheadFirst().getValue()));
-        }
+        return switch (context.getNextToken()) {
+            case KEYWORD_CONDITIONS -> QuerySection.CONDITIONS;
+            case KEYWORD_ORDER -> QuerySection.ORDER_BY;
+            case KEYWORD_LIMIT -> QuerySection.LIMIT;
+            case KEYWORD_OFFSET -> QuerySection.OFFSET;
+            default -> throw new DSLParserException(String.format("Unexpected token %s of '%s'",
+                    context.getNextToken(), context.getLookAheadFirst().getValue()));
+        };
     }
 
     @Override

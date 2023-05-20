@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Standard Spring context configuration class.
- * Can be used for Spring Boot auto-configuration.
+ * Can be used for Spring Boot autoconfiguration.
  *
  * @author Peter Smith
  */

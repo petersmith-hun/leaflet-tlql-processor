@@ -1,8 +1,6 @@
 package hu.psprog.leaflet.tlql.grammar;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import lombok.Data;
 
 import java.util.regex.MatchResult;
 
@@ -12,6 +10,7 @@ import java.util.regex.MatchResult;
  *
  * @author Peter Smith
  */
+@Data
 public class ParsedToken implements Cloneable {
 
     public static final ParsedToken TERMINATION_TOKEN = new ParsedToken();
@@ -49,42 +48,6 @@ public class ParsedToken implements Cloneable {
 
     public int getEndIndex() {
         return endIndex;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ParsedToken that = (ParsedToken) o;
-
-        return new EqualsBuilder()
-                .append(startIndex, that.startIndex)
-                .append(endIndex, that.endIndex)
-                .append(token, that.token)
-                .append(value, that.value)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(token)
-                .append(value)
-                .append(startIndex)
-                .append(endIndex)
-                .toHashCode();
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("token", token)
-                .append("value", value)
-                .append("startIndex", startIndex)
-                .append("endIndex", endIndex)
-                .toString();
     }
 
     public ParsedToken clone() {
