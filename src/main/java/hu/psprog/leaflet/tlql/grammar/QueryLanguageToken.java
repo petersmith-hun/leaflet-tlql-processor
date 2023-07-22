@@ -29,6 +29,7 @@ public enum QueryLanguageToken {
     OBJECT_MESSAGE("message", 1, TokenGroup.OBJECT, 0),
     OBJECT_TIMESTAMP("timestamp", 1, TokenGroup.OBJECT, 0),
     OBJECT_LOGGER("logger", 1, TokenGroup.OBJECT, 0),
+    OBJECT_THREAD("thread", 1, TokenGroup.OBJECT, 0),
     OBJECT_CONTEXT("([a-zA-Z-_]+)", 10, TokenGroup.OBJECT, 0),
 
     OPERATOR_EQUAL("=", 1, TokenGroup.OPERATOR, 0),

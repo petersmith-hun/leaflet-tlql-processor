@@ -15,6 +15,7 @@ public enum DSLObject {
     TIMESTAMP(false),
     MESSAGE(false),
     LOGGER(false),
+    THREAD(false),
     CONTEXT(true);
 
     private final boolean specialized;

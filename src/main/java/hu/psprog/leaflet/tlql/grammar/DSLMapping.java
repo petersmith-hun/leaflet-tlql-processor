@@ -23,6 +23,7 @@ public interface DSLMapping {
             QueryLanguageToken.OBJECT_MESSAGE, DSLObject.MESSAGE,
             QueryLanguageToken.OBJECT_TIMESTAMP, DSLObject.TIMESTAMP,
             QueryLanguageToken.OBJECT_LOGGER, DSLObject.LOGGER,
+            QueryLanguageToken.OBJECT_THREAD, DSLObject.THREAD,
             QueryLanguageToken.OBJECT_CONTEXT, DSLObject.CONTEXT
     );
 

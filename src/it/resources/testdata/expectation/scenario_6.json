@@ -39,6 +39,16 @@
         },
         {
           "objectContext": {
+            "object": "THREAD"
+          },
+          "operator": "NOT_EQUALS",
+          "value": "main",
+          "multipleValue": null,
+          "timestampValue": null,
+          "nextConditionOperator": "AND"
+        },
+        {
+          "objectContext": {
             "object": "TIMESTAMP"
           },
           "operator": "BETWEEN",
