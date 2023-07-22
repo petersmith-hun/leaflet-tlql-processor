@@ -3,7 +3,9 @@
     {
       "conditions": [
         {
-          "object": "SOURCE",
+          "objectContext": {
+            "object": "SOURCE"
+          },
           "operator": "EQUALS",
           "value": "lcfa",
           "multipleValue": null,
@@ -16,7 +18,9 @@
     {
       "conditions": [
         {
-          "object": "LEVEL",
+          "objectContext": {
+            "object": "LEVEL"
+          },
           "operator": "EQUALS",
           "value": "error",
           "multipleValue": null,
@@ -24,7 +28,9 @@
           "nextConditionOperator": "OR"
         },
         {
-          "object": "LOGGER",
+          "objectContext": {
+            "object": "LOGGER"
+          },
           "operator": "NOT_EQUALS",
           "value": "hu.psprog.leaflet.lcfa.Something",
           "multipleValue": null,

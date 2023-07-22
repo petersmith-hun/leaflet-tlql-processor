@@ -5,6 +5,7 @@ import hu.psprog.leaflet.tlql.grammar.GrammarParserContext;
 import hu.psprog.leaflet.tlql.grammar.strategy.QuerySection;
 import hu.psprog.leaflet.tlql.ir.DSLCondition;
 import hu.psprog.leaflet.tlql.ir.DSLObject;
+import hu.psprog.leaflet.tlql.ir.DSLObjectContext;
 import hu.psprog.leaflet.tlql.ir.DSLOperator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,7 @@ class MultiMatchConditionSectionParserTest extends AbstractSectionParserBaseTest
         GrammarParserContext grammarParserContext =
                 prepareGrammarParserContext("source either ('lcfa') with limit");
         DSLCondition expectedDSLCondition = new DSLCondition();
-        expectedDSLCondition.setObject(DSLObject.SOURCE);
+        expectedDSLCondition.setObjectContext(new DSLObjectContext(DSLObject.SOURCE, null));
         expectedDSLCondition.setOperator(DSLOperator.EITHER);
         expectedDSLCondition.setMultipleValue(Collections.singletonList("lcfa"));
 
@@ -82,7 +83,7 @@ class MultiMatchConditionSectionParserTest extends AbstractSectionParserBaseTest
         GrammarParserContext grammarParserContext =
                 prepareGrammarParserContext("level none ('info', 'warning', 'error') with limit");
         DSLCondition expectedDSLCondition = new DSLCondition();
-        expectedDSLCondition.setObject(DSLObject.LEVEL);
+        expectedDSLCondition.setObjectContext(new DSLObjectContext(DSLObject.LEVEL, null));
         expectedDSLCondition.setOperator(DSLOperator.NONE);
         expectedDSLCondition.setMultipleValue(Arrays.asList("info", "warning", "error"));
 

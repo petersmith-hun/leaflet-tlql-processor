@@ -3,7 +3,9 @@
     {
       "conditions": [
         {
-          "object": "SOURCE",
+          "objectContext": {
+            "object": "SOURCE"
+          },
           "operator": "EITHER",
           "value": null,
           "multipleValue": [
@@ -15,7 +17,9 @@
           "nextConditionOperator": "AND"
         },
         {
-          "object": "LEVEL",
+          "objectContext": {
+            "object": "LEVEL"
+          },
           "operator": "EQUALS",
           "value": "error",
           "multipleValue": null,
@@ -23,7 +27,9 @@
           "nextConditionOperator": "AND"
         },
         {
-          "object": "TIMESTAMP",
+          "objectContext": {
+            "object": "TIMESTAMP"
+          },
           "operator": "GREATER_THAN",
           "value": null,
           "multipleValue": null,
@@ -35,7 +41,9 @@
           "nextConditionOperator": "AND"
         },
         {
-          "object": "MESSAGE",
+          "objectContext": {
+            "object": "MESSAGE"
+          },
           "operator": "LIKE",
           "value": "something went wrong",
           "multipleValue": null,

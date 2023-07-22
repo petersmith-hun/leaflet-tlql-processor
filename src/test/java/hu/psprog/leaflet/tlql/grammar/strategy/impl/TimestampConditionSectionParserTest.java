@@ -5,6 +5,7 @@ import hu.psprog.leaflet.tlql.grammar.GrammarParserContext;
 import hu.psprog.leaflet.tlql.grammar.strategy.QuerySection;
 import hu.psprog.leaflet.tlql.ir.DSLCondition;
 import hu.psprog.leaflet.tlql.ir.DSLObject;
+import hu.psprog.leaflet.tlql.ir.DSLObjectContext;
 import hu.psprog.leaflet.tlql.ir.DSLOperator;
 import hu.psprog.leaflet.tlql.ir.DSLTimestampValue;
 import org.junit.jupiter.api.Assertions;
@@ -154,7 +155,7 @@ class TimestampConditionSectionParserTest extends AbstractSectionParserBaseTest 
     private static DSLCondition prepareDSLCondition(DSLOperator operator, LocalDateTime leftDateTime) {
 
         DSLCondition dslCondition = new DSLCondition();
-        dslCondition.setObject(DSLObject.TIMESTAMP);
+        dslCondition.setObjectContext(new DSLObjectContext(DSLObject.TIMESTAMP, null));
         dslCondition.setOperator(operator);
         dslCondition.setTimestampValue(new DSLTimestampValue(DSLTimestampValue.IntervalType.NONE, leftDateTime, null));
 
@@ -165,7 +166,7 @@ class TimestampConditionSectionParserTest extends AbstractSectionParserBaseTest 
                                                     LocalDateTime leftDateTime, LocalDateTime rightDateTime) {
 
         DSLCondition dslCondition = new DSLCondition();
-        dslCondition.setObject(DSLObject.TIMESTAMP);
+        dslCondition.setObjectContext(new DSLObjectContext(DSLObject.TIMESTAMP, null));
         dslCondition.setOperator(DSLOperator.BETWEEN);
         dslCondition.setTimestampValue(new DSLTimestampValue(intervalType, leftDateTime, rightDateTime));
 

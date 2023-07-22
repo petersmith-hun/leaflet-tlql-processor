@@ -3,7 +3,9 @@
     {
       "conditions": [
         {
-          "object": "SOURCE",
+          "objectContext": {
+            "object": "SOURCE"
+          },
           "operator": "NONE",
           "value": null,
           "multipleValue": [
@@ -14,7 +16,9 @@
           "nextConditionOperator": "AND"
         },
         {
-          "object": "LEVEL",
+          "objectContext": {
+            "object": "LEVEL"
+          },
           "operator": "EITHER",
           "value": null,
           "multipleValue": [
@@ -26,7 +30,9 @@
           "nextConditionOperator": "AND"
         },
         {
-          "object": "TIMESTAMP",
+          "objectContext": {
+            "object": "TIMESTAMP"
+          },
           "operator": "BETWEEN",
           "value": null,
           "multipleValue": null,

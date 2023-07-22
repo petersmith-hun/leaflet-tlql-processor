@@ -5,6 +5,7 @@ import hu.psprog.leaflet.tlql.grammar.GrammarParserContext;
 import hu.psprog.leaflet.tlql.grammar.strategy.QuerySection;
 import hu.psprog.leaflet.tlql.ir.DSLCondition;
 import hu.psprog.leaflet.tlql.ir.DSLObject;
+import hu.psprog.leaflet.tlql.ir.DSLObjectContext;
 import hu.psprog.leaflet.tlql.ir.DSLOperator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -103,7 +104,7 @@ class SimpleConditionSectionParserTest extends AbstractSectionParserBaseTest {
     private static DSLCondition prepareDSLCondition(DSLObject object, DSLOperator operator, String value) {
 
         DSLCondition dslCondition = new DSLCondition();
-        dslCondition.setObject(object);
+        dslCondition.setObjectContext(new DSLObjectContext(object, null));
         dslCondition.setOperator(operator);
         dslCondition.setValue(value);
 

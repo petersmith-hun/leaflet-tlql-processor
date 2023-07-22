@@ -47,7 +47,7 @@ public class TimestampConditionSectionParser extends AbstractConditionSectionPar
 
         DSLCondition currentCondition = context.createDSLCondition();
 
-        currentCondition.setObject(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OBJECT_MAP::get));
+        currentCondition.setObjectContext(context.extractObjectAndAdvance());
         currentCondition.setOperator(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OPERATOR_MAP::get));
 
         if (currentCondition.getOperator() == DSLOperator.BETWEEN) {

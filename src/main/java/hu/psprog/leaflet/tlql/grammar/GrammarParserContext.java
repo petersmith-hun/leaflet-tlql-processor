@@ -4,6 +4,7 @@ import hu.psprog.leaflet.tlql.exception.DSLParserException;
 import hu.psprog.leaflet.tlql.ir.DSLCondition;
 import hu.psprog.leaflet.tlql.ir.DSLConditionGroup;
 import hu.psprog.leaflet.tlql.ir.DSLObject;
+import hu.psprog.leaflet.tlql.ir.DSLObjectContext;
 import hu.psprog.leaflet.tlql.ir.DSLOrderDirection;
 import hu.psprog.leaflet.tlql.ir.DSLQueryModel;
 
@@ -250,6 +251,25 @@ public class GrammarParserContext {
         discardToken();
 
         return value;
+    }
+
+    /**
+     * Extracts the current token as object (after verification), then advances the context.
+     * Also extracts the contextual information for the given object (if any).
+     *
+     * @return extracted object and its contextual specification, wrapped as {@link DSLObjectContext}
+     */
+    public DSLObjectContext extractObjectAndAdvance() {
+
+        assertExpectedToken(QueryLanguageToken.TokenGroup.OBJECT);
+        DSLObject object = DSLMapping.TOKEN_TO_OBJECT_MAP.get(lookAheadFirst.getToken());
+        String specialization = object.isSpecialized()
+                ? lookAheadFirst.getValue()
+                : null;
+
+        discardToken();
+
+        return new DSLObjectContext(object, specialization);
     }
 
     private <T> T assertNonNullValue(T value) {
