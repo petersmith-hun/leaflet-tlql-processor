@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>leaflet-tlql-processor</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 
     <parent>
         <groupId>hu.psprog.leaflet</groupId>
         <artifactId>leaflet-stack-base-bom</artifactId>
-        <version>3.0-r2305.1</version>
+        <version>3.2-r2307.3</version>
     </parent>
 
     <properties>

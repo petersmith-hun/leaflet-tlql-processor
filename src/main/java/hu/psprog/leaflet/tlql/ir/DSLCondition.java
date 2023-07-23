@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class DSLCondition {
 
-    private DSLObject object;
+    private DSLObjectContext objectContext;
     private DSLOperator operator;
     private String value;
     private List<String> multipleValue;

@@ -33,7 +33,7 @@ public class MultiMatchConditionSectionParser extends AbstractConditionSectionPa
 
         DSLCondition currentCondition = context.createDSLCondition();
 
-        currentCondition.setObject(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OBJECT_MAP::get));
+        currentCondition.setObjectContext(context.extractObjectAndAdvance());
         currentCondition.setOperator(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OPERATOR_MAP::get));
         currentCondition.setMultipleValue(extractParameters(context));
     }

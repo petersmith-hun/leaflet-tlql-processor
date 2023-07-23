@@ -30,7 +30,7 @@ public class SimpleConditionSectionParser extends AbstractConditionSectionParser
 
         DSLCondition currentCondition = context.createDSLCondition();
 
-        currentCondition.setObject(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OBJECT_MAP::get));
+        currentCondition.setObjectContext(context.extractObjectAndAdvance());
         currentCondition.setOperator(context.extractValueAndAdvance(DSLMapping.TOKEN_TO_OPERATOR_MAP::get));
         currentCondition.setValue(context.readToken(QueryLanguageToken.TokenGroup.LITERAL).getValue());
         context.discardToken();

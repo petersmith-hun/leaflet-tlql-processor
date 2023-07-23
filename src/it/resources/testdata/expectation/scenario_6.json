@@ -3,7 +3,9 @@
     {
       "conditions": [
         {
-          "object": "SOURCE",
+          "objectContext": {
+            "object": "SOURCE"
+          },
           "operator": "EQUALS",
           "value": "leaflet",
           "multipleValue": null,
@@ -11,7 +13,44 @@
           "nextConditionOperator": "AND"
         },
         {
-          "object": "TIMESTAMP",
+          "objectContext": {
+            "object": "CONTEXT",
+            "specialization": "requestID"
+          },
+          "operator": "EQUALS",
+          "value": "request1234",
+          "multipleValue": null,
+          "timestampValue": null,
+          "nextConditionOperator": "AND"
+        },
+        {
+          "objectContext": {
+            "object": "CONTEXT",
+            "specialization": "trace_id"
+          },
+          "operator": "EITHER",
+          "value": null,
+          "multipleValue": [
+            "trace-1234",
+            "trace-4567"
+          ],
+          "timestampValue": null,
+          "nextConditionOperator": "AND"
+        },
+        {
+          "objectContext": {
+            "object": "THREAD"
+          },
+          "operator": "NOT_EQUALS",
+          "value": "main",
+          "multipleValue": null,
+          "timestampValue": null,
+          "nextConditionOperator": "AND"
+        },
+        {
+          "objectContext": {
+            "object": "TIMESTAMP"
+          },
           "operator": "BETWEEN",
           "value": null,
           "multipleValue": null,

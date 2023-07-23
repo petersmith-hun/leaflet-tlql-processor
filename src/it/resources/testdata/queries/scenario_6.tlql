@@ -1,5 +1,8 @@
 search
 with conditions
   source = "leaflet"
+  and requestID = "request1234"
+  and trace_id either ("trace-1234", 'trace-4567')
+  and thread != "main"
   and timestamp between ]2021-03-21 12:00:00, 2021-03-28 23:00:00[
 with limit 100
