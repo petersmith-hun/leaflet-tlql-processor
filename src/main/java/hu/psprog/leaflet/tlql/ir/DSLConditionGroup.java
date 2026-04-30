@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class DSLConditionGroup {
 
-    private final List<DSLCondition> conditions = new LinkedList<>();
+    private List<DSLCondition> conditions = new LinkedList<>();
     private DSLLogicalOperator nextConditionGroupOperator;
 
 }

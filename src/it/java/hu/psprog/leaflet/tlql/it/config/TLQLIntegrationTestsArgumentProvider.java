@@ -1,14 +1,15 @@
 package hu.psprog.leaflet.tlql.it.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import hu.psprog.leaflet.tlql.ir.DSLQueryModel;
 import hu.psprog.leaflet.tlql.ir.DSLTimestampValue;
+import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.support.ParameterDeclarations;
 import org.springframework.core.io.ClassPathResource;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +31,7 @@ import java.util.stream.Stream;
 public class TLQLIntegrationTestsArgumentProvider implements ArgumentsProvider {
 
     private static final ClassPathResource SCENARIO_QUERY_FILES_PATH = new ClassPathResource("testdata/queries");
-    private final ObjectMapper objectMapper;
+    private final JsonMapper jsonMapper;
 
     TLQLIntegrationTestsArgumentProvider() {
 
@@ -38,13 +39,14 @@ public class TLQLIntegrationTestsArgumentProvider implements ArgumentsProvider {
         dslTimestampDeserializationModule.addDeserializer(DSLTimestampValue.class,
                 new DSLTimestampValueDeserializer(DSLTimestampValue.class));
 
-        this.objectMapper = new ObjectMapper();
-        this.objectMapper.registerModule(dslTimestampDeserializationModule);
-        this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        this.jsonMapper = JsonMapper.builder()
+                .addModule(dslTimestampDeserializationModule)
+                .build();
     }
 
     @Override
-    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+    @NonNull
+    public Stream<? extends Arguments> provideArguments(@NonNull ParameterDeclarations parameters, @NonNull ExtensionContext extensionContext) throws Exception {
 
         return findScenarioQueryFiles()
                 .map(this::prepareArgumentsForScenario);
@@ -54,7 +56,7 @@ public class TLQLIntegrationTestsArgumentProvider implements ArgumentsProvider {
         try {
 
             String query = Files.readString(path);
-            DSLQueryModel expectedQueryModel = objectMapper.readValue(getExpectationFile(path), DSLQueryModel.class);
+            DSLQueryModel expectedQueryModel = jsonMapper.readValue(getExpectationFile(path), DSLQueryModel.class);
 
             return Arguments.of(query, expectedQueryModel);
         } catch (IOException e) {
