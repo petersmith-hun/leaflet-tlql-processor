@@ -2,12 +2,14 @@ package hu.psprog.leaflet.tlql.processor.engine.impl;
 
 import hu.psprog.leaflet.tlql.grammar.ParsedToken;
 import hu.psprog.leaflet.tlql.grammar.QueryLanguageToken;
+import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.support.ParameterDeclarations;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -59,7 +61,8 @@ class RegexBasedQueryLanguageTokenizerTest {
         private int tokenIndex = 0;
 
         @Override
-        public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
+        @NonNull
+        public Stream<? extends Arguments> provideArguments(@NonNull ParameterDeclarations parameters, @NonNull ExtensionContext extensionContext) {
 
             Arguments[] argumentsArray = {
 

@@ -1,13 +1,12 @@
 package hu.psprog.leaflet.tlql.it.config;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.ObjectCodec;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import hu.psprog.leaflet.tlql.ir.DSLTimestampValue;
+import tools.jackson.core.JsonParser;
+import tools.jackson.core.ObjectReadContext;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.deser.std.StdDeserializer;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
@@ -22,19 +21,19 @@ public class DSLTimestampValueDeserializer extends StdDeserializer<DSLTimestampV
     }
 
     @Override
-    public DSLTimestampValue deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException {
+    public DSLTimestampValue deserialize(JsonParser parser, DeserializationContext ctxt) {
 
-        ObjectCodec objectCodec = parser.getCodec();
+        ObjectReadContext objectCodec = parser.objectReadContext();
         JsonNode node = objectCodec.readTree(parser);
 
-        DSLTimestampValue.IntervalType intervalType = DSLTimestampValue.IntervalType.valueOf(node.get("intervalType").asText());
-        LocalDateTime leftOfSimpleDateTime = LocalDateTime.parse(node.get("leftOrSimple").asText());
+        DSLTimestampValue.IntervalType intervalType = DSLTimestampValue.IntervalType.valueOf(node.get("intervalType").asString());
+        LocalDateTime leftOfSimpleDateTime = LocalDateTime.parse(node.get("leftOrSimple").asString());
 
         DSLTimestampValue timestampValue;
         if (intervalType == DSLTimestampValue.IntervalType.NONE) {
             timestampValue = new DSLTimestampValue(leftOfSimpleDateTime);
         } else {
-            LocalDateTime rightDateTime = LocalDateTime.parse(node.get("right").asText());
+            LocalDateTime rightDateTime = LocalDateTime.parse(node.get("right").asString());
             timestampValue = new DSLTimestampValue(intervalType, leftOfSimpleDateTime, rightDateTime);
         }
 

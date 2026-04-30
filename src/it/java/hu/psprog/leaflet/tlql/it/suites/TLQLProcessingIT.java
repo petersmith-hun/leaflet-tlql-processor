@@ -1,7 +1,5 @@
 package hu.psprog.leaflet.tlql.it.suites;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.psprog.leaflet.tlql.config.TLQLProcessorConfig;
 import hu.psprog.leaflet.tlql.ir.DSLQueryModel;
 import hu.psprog.leaflet.tlql.it.config.ITContextConfig;
@@ -15,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import tools.jackson.databind.json.JsonMapper;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,7 +35,7 @@ public class TLQLProcessingIT {
     private TLQLProcessorService tlqlProcessorService;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    private JsonMapper jsonMapper;
 
     @Value("${it.show-generated-query-model:false}")
     private boolean showGeneratedQueryModel;
@@ -55,12 +54,8 @@ public class TLQLProcessingIT {
 
     private void logGeneratedQueryModel(DSLQueryModel result) {
         if (showGeneratedQueryModel) {
-            try {
-                String resultAsJson = objectMapper.writeValueAsString(result);
-                LOGGER.info("Generated query model: {}", resultAsJson);
-            } catch (JsonProcessingException e) {
-                LOGGER.error("Failed to log generated query model", e);
-            }
+            String resultAsJson = jsonMapper.writeValueAsString(result);
+            LOGGER.info("Generated query model: {}", resultAsJson);
         }
     }
 }

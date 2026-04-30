@@ -15,8 +15,8 @@ import java.util.Map;
 @Data
 public class DSLQueryModel {
 
-    private final List<DSLConditionGroup> conditionGroups = new LinkedList<>();
-    private final Map<DSLObject, DSLOrderDirection> ordering = new LinkedHashMap<>();
+    private List<DSLConditionGroup> conditionGroups = new LinkedList<>();
+    private Map<DSLObject, DSLOrderDirection> ordering = new LinkedHashMap<>();
     private int offset;
     private int limit;
 
